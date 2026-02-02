@@ -1,7 +1,8 @@
-public class Main {
-    public static void main(String[] args) {
-        // 숫자 야구 게임
-        
+import gameController.GameController;
 
-    };
-};
+public class Application {
+    public static void main(String[] args) {
+        GameController gameController = new GameController();
+        gameController.start();
+    }
+}
