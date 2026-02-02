@@ -3,7 +3,7 @@ package view;
 public class OutputView {
 
     public void printGameStart() {
-        System.out.println("숫자 야구 게임을 시작");
+        System.out.println("숫자 야구 게임 시작");
     }
 
     public void printResult(int strike, int ball, int failCount) {
@@ -16,7 +16,7 @@ public class OutputView {
             text.append(ball).append("볼 ");
         }
         if (strike == 0 && ball == 0) {
-            text.append("실패 ");
+            text.append("일치값 없음 ");
         }
 
         text.append("(").append(failCount).append("번 실패)");

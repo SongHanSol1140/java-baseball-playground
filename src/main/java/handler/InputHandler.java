@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 public class InputHandler {
     private final Scanner scanner;
-
     public InputHandler() {
         this.scanner = new Scanner(System.in);
     }
@@ -35,6 +34,7 @@ public class InputHandler {
 
     }
 
+    // 재시작 로직이
     public void close() {
         scanner.close();
     }
