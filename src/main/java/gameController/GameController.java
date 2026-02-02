@@ -1,40 +1,44 @@
 package gameController;
 
-import computer.Computer;
+import domain.model.BaseBallNumbers;
+import domain.model.GameResult;
+import domain.service.Referee;
+import domain.generator.RandomNumberGenerator;
 import handler.InputHandler;
 import view.OutputView;
 
+
 public class GameController {
-    private final Computer computer;
     private final InputHandler inputHandler;
     private final OutputView outputView;
+    private final Referee referee;
     private int failCount;
 
     public GameController() {
-        this.computer = new Computer();
         this.inputHandler = new InputHandler();
         this.outputView = new OutputView();
+        this.referee = new Referee();
         this.failCount = 0;
     }
 
     public void start() {
-        computer.generateNumbers();
+        RandomNumberGenerator numberGenerator = new RandomNumberGenerator();
+        BaseBallNumbers problemNumbers = new BaseBallNumbers(numberGenerator.problemNumbersGenerate());
+
         outputView.printGameStart();
         try {
             while (true) {
+
                 String userInput = inputHandler.getUserInput();
-                int[] result = computer.compare(userInput);
+                BaseBallNumbers userNumbers = BaseBallNumbers.parseIntegerList(userInput);
 
-                int strike = result[0];
-                int ball = result[1];
-
-                if (strike == 3) {
+                GameResult gameResult = referee.decides(problemNumbers, userNumbers);
+                if (gameResult.isWin()) {
                     outputView.printWin();
                     break;
                 }
-
                 failCount++;
-                outputView.printResult(strike, ball, failCount);
+                outputView.printResult(gameResult.getStrike(), gameResult.getBall(), failCount);
             }
             inputHandler.close();
         } catch (IllegalArgumentException error) {
