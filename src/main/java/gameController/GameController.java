@@ -3,7 +3,8 @@ package gameController;
 import domain.model.BaseBallNumbers;
 import domain.model.GameResult;
 import domain.service.Referee;
-import domain.generator.RandomNumberGenerator;
+import domain.generator.BaseBallNumbersGenerator;
+import domain.generator.RandomNumbersGenerator;
 import handler.InputHandler;
 import view.OutputView;
 
@@ -22,16 +23,13 @@ public class GameController {
     }
 
     public void start() {
-        RandomNumberGenerator numberGenerator = new RandomNumberGenerator();
-        BaseBallNumbers problemNumbers = new BaseBallNumbers(numberGenerator.problemNumbersGenerate());
-
+        BaseBallNumbersGenerator numberGenerator = new BaseBallNumbersGenerator(new RandomNumbersGenerator());
+        BaseBallNumbers problemNumbers = new BaseBallNumbers(numberGenerator.generate());
         outputView.printGameStart();
         try {
             while (true) {
-
                 String userInput = inputHandler.getUserInput();
                 BaseBallNumbers userNumbers = BaseBallNumbers.parseIntegerList(userInput);
-
                 GameResult gameResult = referee.decides(problemNumbers, userNumbers);
                 if (gameResult.isWin()) {
                     outputView.printWin();

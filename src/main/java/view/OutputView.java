@@ -8,7 +8,6 @@ public class OutputView {
 
     public void printResult(int strike, int ball, int failCount) {
         StringBuilder text = new StringBuilder();
-
         if (strike > 0) {
             text.append(strike).append("스트라이크 ");
         }
