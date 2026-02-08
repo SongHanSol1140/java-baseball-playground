@@ -24,12 +24,12 @@ public class GameController {
 
     public void start() {
         BaseBallNumbersGenerator numberGenerator = new BaseBallNumbersGenerator(new RandomNumbersGenerator());
-        BaseBallNumbers problemNumbers = new BaseBallNumbers(numberGenerator.generate());
+        BaseBallNumbers problemNumbers = BaseBallNumbers.from(numberGenerator.generate());
         outputView.printGameStart();
         try {
             while (true) {
                 String userInput = inputHandler.getUserInput();
-                BaseBallNumbers userNumbers = BaseBallNumbers.parseIntegerList(userInput);
+                BaseBallNumbers userNumbers = BaseBallNumbers.parse(userInput);
                 GameResult gameResult = referee.decides(problemNumbers, userNumbers);
                 if (gameResult.isWin()) {
                     outputView.printWin();
@@ -41,7 +41,6 @@ public class GameController {
             inputHandler.close();
         } catch (IllegalArgumentException error) {
             System.out.println(error.getMessage());
-            System.exit(0);
         }
     }
 }

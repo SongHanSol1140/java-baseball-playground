@@ -6,10 +6,10 @@ import java.util.List;
 public class BaseBallNumbers {
     public static final int NumberSize = 3;
     private final List<Integer> numbers;
-
-
-
-    public static BaseBallNumbers parseIntegerList(String input) {
+    public static BaseBallNumbers from(List<Integer> numbers) {
+        return new BaseBallNumbers(numbers);
+    }
+    public static BaseBallNumbers parse(String input) {
         List<Integer> numbers = new ArrayList<>();
         for (char c : input.toCharArray()) {
             numbers.add(Character.getNumericValue(c));
@@ -17,7 +17,7 @@ public class BaseBallNumbers {
         return new BaseBallNumbers(numbers);
     }
 
-    public BaseBallNumbers(List<Integer> numbers) {
+    private BaseBallNumbers(List<Integer> numbers) {
         validate(numbers);
         this.numbers = numbers;
     }
