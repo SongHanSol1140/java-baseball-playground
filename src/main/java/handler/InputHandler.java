@@ -1,5 +1,7 @@
 package handler;
 
+import domain.model.BaseBallNumbers;
+
 import java.util.Scanner;
 
 public class InputHandler {
@@ -17,18 +19,18 @@ public class InputHandler {
 
     private void validate(String input) {
         // 자릿수 체크
-        if (input.length() != 3) {
+        if (input.length() != BaseBallNumbers.NumberSize) {
             throw new IllegalArgumentException("3자리 숫자를 입력하세요.");
         }
         // 1-9 숫자 확인
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < BaseBallNumbers.NumberSize; i++) {
             char c = input.charAt(i);
             if (c < '1' || c > '9') {
                 throw new IllegalArgumentException("1-9 사이 숫자만 입력하세요.");
             }
         }
         // 중복 체크
-        if (input.chars().distinct().count() != 3) {
+        if (input.chars().distinct().count() != BaseBallNumbers.NumberSize) {
             throw new IllegalArgumentException("중복된 숫자는 입력할 수 없습니다.");
         }
 

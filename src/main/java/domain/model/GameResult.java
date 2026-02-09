@@ -10,7 +10,7 @@ public class GameResult {
     }
 
     public boolean isWin() {
-        return strike == 3;
+        return strike == BaseBallNumbers.NumberSize;
     }
 
     public boolean isNothing() {
